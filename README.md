@@ -51,6 +51,14 @@
 
 **Note:** These are the account details supplied for project testing. Actual permissions depend on the roles assigned to each account in the backend.
 
+### For Swagger Testing
+
+```json
+{
+  https://localhost:YOUR_PORT/swagger
+}
+```
+
 ---
 
 ## 📌 Project Overview
