@@ -1,6 +1,7 @@
 # TheCart24 — E-Commerce Platform
 
-## 🔐 Login Credentials
+## 🔐 Login Credentials For Databse in My SSMS
+Don't Use if Your Database in Different Machine
 
 > **Testing accounts only.** Do not use real production passwords in this file.
 
