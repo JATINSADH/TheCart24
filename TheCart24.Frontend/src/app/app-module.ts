@@ -21,6 +21,7 @@ import { CheckoutComponent } from './components/checkout-component/checkout-comp
 import { ThankYouComponent } from './components/thank-you-component/thank-you-component';
 import { MyOrderComponent } from './components/my-order-component/my-order-component';
 import { SellerDashboard } from './components/seller-dashboard/seller-dashboard';
+import { MyAccount } from './components/my-account/my-account';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SellerDashboard } from './components/seller-dashboard/seller-dashboard'
     ThankYouComponent,
     MyOrderComponent,
     SellerDashboard,
+    MyAccount,
   ],
   imports: [BrowserModule, AppRoutingModule, CommonModule, HttpClientModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners(), CartServices],

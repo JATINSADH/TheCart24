@@ -23,6 +23,18 @@
 
     <button type="button">Search</button>
   </div>
+
+  <!-- My Account -->
+  <a routerLink="/my-account"
+     class="nav-account"
+     *ngIf="isLoggedIn"
+     title="My Account"
+     aria-label="My Account">
+
+    <span class="account-icon">👤</span>
+    <span class="account-label">My Account</span>
+  </a>
+
   <a routerLink="/my-orders"
      routerLinkActive="active"
      class="my-orders-link"

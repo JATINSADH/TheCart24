@@ -1,0 +1,48 @@
+
+<div class="account-page">
+  <div class="account-card">
+    <div class="account-heading">
+      <div class="account-avatar">👤</div>
+      <div>
+        <h1>My Account</h1>
+        <p>View your account information</p>
+      </div>
+      <button class="back-btn" type="button" (click)="goBack()">
+        ← Back
+      </button>
+    </div>
+    
+
+    <p *ngIf="loading" class="status-message">Loading account...</p>
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <div *ngIf="!loading">
+      <div class="account-field">
+        <label>Full Name</label>
+        <div class="field-value">{{ account.fullName || 'Not available' }}</div>
+      </div>
+
+      <div class="account-field">
+        <label>Email Address</label>
+        <div class="field-value">{{ account.email || 'Not available' }}</div>
+      </div>
+
+      <div class="account-field">
+        <label>Mobile Number</label>
+        <div class="field-value">{{ account.phoneNumber || 'Not available' }}</div>
+      </div>
+
+      <div class="danger-zone">
+        <h3>Delete Account</h3>
+        <p>Permanently delete your account. This action cannot be undone.</p>
+
+        <button class="delete-btn"
+                type="button"
+                [disabled]="deleting"
+                (click)="deleteAccount()">
+          {{ deleting ? 'Deleting...' : 'Delete My Account' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

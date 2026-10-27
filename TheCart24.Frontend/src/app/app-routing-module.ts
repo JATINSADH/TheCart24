@@ -25,6 +25,8 @@ import { authGuard } from './guards/auth-guard';
 import { MyOrderComponent } from './components/my-order-component/my-order-component';
 
 import { SellerDashboard } from './components/seller-dashboard/seller-dashboard';
+
+import { MyAccount } from './components/my-account/my-account';
 const routes: Routes = [
   { path: '', component: Home },
 
@@ -43,6 +45,12 @@ const routes: Routes = [
     component: SellerDashboard,
     canActivate: [adminGuard]
   },
+
+  {
+  path: 'my-account',
+  component: MyAccount,
+  canActivate: [authGuard]
+},
   {
     path: 'cart',
     component: Cart,

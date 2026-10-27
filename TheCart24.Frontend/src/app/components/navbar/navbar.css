@@ -192,3 +192,37 @@
   .seller-panel-btn:hover {
     background: #047857;
   }
+
+.nav-account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 12px;
+  color: #064e3b;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+  .nav-account:hover {
+    background: #ecfdf5;
+    color: #059669;
+  }
+
+.account-icon {
+  font-size: 21px;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .nav-account {
+    padding: 8px;
+  }
+
+  .account-label {
+    display: none;
+  }
+}

@@ -1,0 +1,147 @@
+
+:host {
+  display: block;
+  min-height: 70vh;
+  background: #f6f9f7;
+  padding: 40px 16px;
+}
+
+.account-page {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.account-card {
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #e2ebe5;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(6, 78, 59, 0.07);
+}
+
+.account-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.account-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #d1fae5;
+  font-size: 27px;
+}
+
+.account-heading h1 {
+  margin: 0 0 6px;
+  color: #064e3b;
+  font-size: 27px;
+}
+
+.account-heading p {
+  margin: 0;
+  color: #718078;
+  font-size: 14px;
+}
+
+.account-field {
+  margin-bottom: 20px;
+}
+
+  .account-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #52655a;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+.field-value {
+  padding: 14px;
+  border: 1px solid #e0e9e3;
+  border-radius: 9px;
+  background: #f8fbf9;
+  color: #18352a;
+  overflow-wrap: anywhere;
+}
+
+.danger-zone {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e5e7eb;
+}
+
+  .danger-zone h3 {
+    margin: 0 0 8px;
+    color: #b91c1c;
+    font-size: 17px;
+  }
+
+  .danger-zone p {
+    margin: 0 0 18px;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+.delete-btn {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+  .delete-btn:hover:not(:disabled) {
+    background: #b91c1c;
+  }
+
+  .delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+.error-message {
+  color: #b91c1c;
+}
+
+.status-message {
+  color: #64748b;
+}
+
+@media (max-width: 480px) {
+  .account-card {
+    padding: 20px;
+  }
+
+  .account-heading h1 {
+    font-size: 23px;
+  }
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 10px 16px;
+  border: 1px solid #d5e5dc;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #064e3b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+  .back-btn:hover {
+    background: #ecfdf5;
+    color: #059669;
+  }
