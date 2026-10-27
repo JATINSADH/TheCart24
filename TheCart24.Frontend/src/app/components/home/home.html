@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+
+<main class="home">
+  <section class="discount-banner" *ngIf="activeOffer">
+    <div>
+      <p class="offer-label">SPECIAL OFFER</p>
+
+      <h2>{{ activeOffer.name }}</h2>
+
+      <p>
+        Get {{ activeOffer.discountPercentage }}% OFF!
+      </p>
+    </div>
+
+    <button routerLink="/products">
+      Shop Now
+    </button>
+  </section>
+  <section class="hero">
+
+    <div class="hero-content">
+      <p class="eyebrow">WELCOME TO THECART24</p>
+
+      <h1>Everything you need.<br />All in one cart.</h1>
+
+      <p>Discover great products at prices you'll love.</p>
+
+      <a routerLink="/" class="shop-button">Explore Store →</a>
+    </div>
+
+    <div class="hero-visual">
+      <span>🛍️</span>
+    </div>
+  </section>
+
+  <section class="products">
+    <p class="eyebrow">OUR COLLECTION</p>
+    <h2>Popular Products</h2>
+
+    <div class="empty-products">
+      <span>📦</span>
+      <h3>Products coming soon</h3>
+      <p>Our products will appear here from the backend API.</p>
+    </div>
+  </section>
+</main>
+
+<!--<app-products></app-products>-->

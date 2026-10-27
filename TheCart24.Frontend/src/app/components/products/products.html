@@ -1,0 +1,138 @@
+
+<section class="products-page">
+  <button class="back-btn" (click)="goHome()">
+    ← Back to Home
+  </button>
+  <!-- Page Heading -->
+  <div class="products-heading">
+    <div>
+      <p class="eyebrow">THECART24 COLLECTION</p>
+      <h1>Explore Products</h1>
+      <p class="subtitle">Find something you'll love.</p>
+    </div>
+
+    <span class="product-count">
+      {{ totalCount }} products
+    </span>
+    <button class="view-cart-btn" (click)="goToCart()">
+      🛒 View Cart
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="loader"></div>
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Error State -->
+  <div class="error-state"
+       *ngIf="!loading && errorMessage">
+
+    <h2>Something went wrong</h2>
+    <p>{{ errorMessage }}</p>
+
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state"
+       *ngIf="!loading && !errorMessage && products.length === 0">
+
+    <div class="empty-icon">🛍️</div>
+    <h2>We're getting things ready!</h2>
+    <p>Our products will appear here soon. Please check back later.</p>
+
+  </div>
+
+  <!-- Products Grid -->
+  <div class="product-grid"
+       *ngIf="!loading && !errorMessage && products.length > 0">
+
+    <article class="product-card"
+             *ngFor="let product of products">
+
+      <!-- Product Image -->
+      <div class="product-image">
+
+        <img *ngIf="product.imageUrl; else placeholder"
+             [src]="product.imageUrl"
+             [alt]="product.name"
+             loading="lazy" />
+
+        <ng-template #placeholder>
+          <div class="image-placeholder">
+            <span>🛍️</span>
+          </div>
+        </ng-template>
+
+      </div>
+
+      <!-- Product Information -->
+      <div class="product-info">
+
+        <h3>{{ product.name }}</h3>
+
+        <p class="description">
+          {{ product.description }}
+        </p>
+
+        <!-- Price and Stock -->
+        <div class="product-bottom">
+
+          <strong class="product-price">
+            {{ product.price | currency:'INR':'symbol':'1.2-2' }}
+          </strong>
+
+          <span class="stock-status"
+                [class.out-of-stock]="product.stockQuantity <= 0">
+
+            {{ product.stockQuantity > 0 ? 'In stock' : 'Out of stock' }}
+
+          </span>
+
+        </div>
+
+        <!-- Add to Cart -->
+
+        <button type="button"
+                class="add-to-cart-btn"
+                [disabled]="product.stockQuantity <= 0"
+                (click)="addToCart(product)">
+          {{ product.stockQuantity > 0 ? 'Add to Cart' : 'Unavailable' }}
+        </button>
+
+
+      </div>
+
+    </article>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination"
+       *ngIf="!loading && !errorMessage && totalPages > 1">
+
+    <button type="button"
+            [disabled]="page <= 1 || loading"
+            (click)="goToPage(page - 1)">
+
+      Previous
+
+    </button>
+
+    <span class="pagination-info">
+      Page {{ page }} of {{ totalPages }}
+    </span>
+
+    <button type="button"
+            [disabled]="page >= totalPages || loading"
+            (click)="goToPage(page + 1)">
+
+      Next
+
+    </button>
+
+
+  </div>
+
+</section>

@@ -1,0 +1,47 @@
+```html
+<section class="login-page">
+  <div class="login-card">
+
+    <a routerLink="/" class="brand">TheCart24<span>.</span></a>
+
+    <h1>Welcome back</h1>
+    <p class="subtitle">Sign in to continue shopping.</p>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+
+      <label for="email">Email address</label>
+      <input id="email"
+             type="email"
+             name="email"
+             [(ngModel)]="email"
+             required
+             email
+             placeholder="you@example.com" />
+
+      <label for="password">Password</label>
+      <input id="password"
+             type="password"
+             name="password"
+             [(ngModel)]="password"
+             required
+             placeholder="Enter your password" />
+
+      <p class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <button type="submit"
+              [disabled]="loading || loginForm.invalid">
+        {{ loading ? 'Signing in...' : 'Sign In' }}
+      </button>
+
+    </form>
+
+    <p class="register-link">
+      Don't have an account?
+      <a routerLink="/register">Create account</a>
+    </p>
+
+  </div>
+</section>
+```

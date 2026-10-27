@@ -1,0 +1,15 @@
+
+.seller-management {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 24px;
+}
+
+button {
+  padding: 10px 16px;
+  background: #059669;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}

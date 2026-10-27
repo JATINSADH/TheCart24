@@ -1,0 +1,194 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 6%;
+  background: white;
+  border-bottom: 1px solid #e5eee8;
+}
+
+.logo {
+  color: #064e3b;
+  font-size: 26px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+  .logo span {
+    color: #10b981;
+  }
+
+.search-box {
+  display: flex;
+  width: min(420px, 40%);
+  border: 1px solid #d5e2d9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+  .search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: none;
+    outline: none;
+  }
+
+  .search-box button {
+    padding: 12px 18px;
+    border: none;
+    background: #059669;
+    color: white;
+    cursor: pointer;
+  }
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+  .nav-links a {
+    color: #34443a;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+    .nav-links a:hover {
+      color: #059669;
+    }
+
+@media (max-width: 700px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .search-box {
+    order: 3;
+    width: 100%;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+}
+
+.nav-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: #07804b;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+  .nav-cart-btn:hover {
+    background: #066b3e;
+  }
+
+
+.nav-link {
+  color: #064e3b;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+  .nav-link:hover {
+    color: #059669;
+    background-color: #ecfdf5;
+  }
+
+  .nav-link.active {
+    color: #059669;
+    background-color: #ecfdf5;
+  }
+.my-orders-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+  .my-orders-link:hover,
+  .my-orders-link.active {
+    background: #059669;
+    border-color: #059669;
+    color: #ffffff;
+  }
+
+
+.nav-login-btn,
+.nav-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Login button */
+.nav-login-btn {
+  background: #059669;
+  color: #ffffff;
+  border: 1px solid #059669;
+}
+
+  .nav-login-btn:hover {
+    background: #047857;
+    border-color: #047857;
+  }
+
+/* Logout button */
+.nav-logout-btn {
+  background: #ffffff;
+  color: #b42318;
+  border: 1px solid #fecaca;
+}
+
+  .nav-logout-btn:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+  }
+
+  .nav-login-btn:focus-visible,
+  .nav-logout-btn:focus-visible {
+    outline: 2px solid #059669;
+    outline-offset: 3px;
+  }
+
+.seller-panel-btn {
+  padding: 10px 18px;
+  background: #059669;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+  .seller-panel-btn:hover {
+    background: #047857;
+  }

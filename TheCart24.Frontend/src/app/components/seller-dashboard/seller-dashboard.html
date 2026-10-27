@@ -1,0 +1,80 @@
+
+<div class="seller-dashboard">
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">THECART24 SELLER CENTRE</p>
+      <h1>Seller Dashboard</h1>
+      <p class="subtitle">Manage your store and track your performance.</p>
+    </div>
+
+    <button class="refresh-btn" (click)="refreshDashboard()"
+            [disabled]="loading">
+      {{ loading ? 'Loading...' : '↻ Refresh' }}
+    </button>
+  </header>
+
+  <p class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+  <div class="loading-message" *ngIf="loading">
+    Loading dashboard...
+  </div>
+
+  <ng-container *ngIf="!loading && !errorMessage">
+    <div class="stats-grid">
+      <article class="stat-card">
+        <div class="stat-icon products-icon">▦</div>
+        <p>Total Products</p>
+        <h2>{{ dashboard.totalProducts }}</h2>
+        <span>Products in your store</span>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon orders-icon">▤</div>
+        <p>Total Orders</p>
+        <h2>{{ dashboard.totalOrders }}</h2>
+        <span>Orders containing your products</span>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon pending-icon">◷</div>
+        <p>Pending Orders</p>
+        <h2>{{ dashboard.pendingOrders }}</h2>
+        <span>Awaiting processing</span>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon shipped-icon">➜</div>
+        <p>Shipped Orders</p>
+        <h2>{{ dashboard.shippedOrders }}</h2>
+        <span>Orders shipped</span>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon delivered-icon">✓</div>
+        <p>Delivered Orders</p>
+        <h2>{{ dashboard.deliveredOrders }}</h2>
+        <span>Successfully delivered</span>
+      </article>
+
+      <article class="stat-card sales-card">
+        <div class="stat-icon sales-icon">₹</div>
+        <p>Total Sales</p>
+        <h2>{{ dashboard.totalSales | currency:'INR':'symbol':'1.2-2' }}</h2>
+        <span>Excluding cancelled orders</span>
+      </article>
+    </div>
+
+    <section class="dashboard-note">
+      <div class="note-icon">i</div>
+      <div>
+        <h3>Store overview</h3>
+        <p>
+          Track your product count, order status and sales from this dashboard.
+          Refresh to load the latest figures.
+        </p>
+      </div>
+    </section>
+  </ng-container>
+</div>

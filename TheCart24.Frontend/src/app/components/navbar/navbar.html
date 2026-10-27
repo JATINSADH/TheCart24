@@ -1,0 +1,53 @@
+
+<header class="navbar">
+  <a routerLink="/" class="logo">
+    TheCart24<span>.</span>
+  </a>
+
+  <nav class="nav-links">
+    <a routerLink="/"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }">
+      Home
+    </a>
+
+    <a routerLink="/products" routerLinkActive="active">
+      Products
+    </a>
+  </nav>
+
+  <div class="search-box">
+    <input type="text"
+           placeholder="Search products..."
+           aria-label="Search products" />
+
+    <button type="button">Search</button>
+  </div>
+  <a routerLink="/my-orders"
+     routerLinkActive="active"
+     class="my-orders-link"
+     *ngIf="isLoggedIn">
+    📦 My Orders
+  </a>
+  <a routerLink="/cart" class="nav-cart-btn">
+    🛒 View Cart
+  </a>
+  <button *ngIf="isAdmin"
+          class="seller-panel-btn"
+          (click)="goToSellerPanel()">
+    Seller Panel
+  </button>
+
+  <button *ngIf="!isLoggedIn"
+          (click)="login()"
+          class="nav-login-btn">
+    Login
+  </button>
+
+  <button *ngIf="isLoggedIn"
+          (click)="logout()"
+          class="nav-logout-btn">
+    Logout
+  </button>
+
+</header>

@@ -1,0 +1,112 @@
+
+<div class="orders-page">
+  <div class="orders-header">
+    <div>
+      <h1>My Orders</h1>
+      <p>View your orders and track their status.</p>
+    </div>
+
+    <a routerLink="/products" class="shop-btn">
+      Continue Shopping
+    </a>
+  </div>
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Loading your orders...</p>
+  </div>
+
+  <div class="error-state" *ngIf="!loading && errorMessage">
+    <p>{{ errorMessage }}</p>
+    <button type="button" (click)="loadOrders()">
+      Try Again
+    </button>
+  </div>
+
+  <div class="empty-state"
+       *ngIf="!loading && !errorMessage && orders.length === 0">
+    <div class="empty-icon">🛍️</div>
+    <h2>No orders yet</h2>
+    <p>Your placed orders will appear here.</p>
+    <a routerLink="/products" class="shop-btn">
+      Explore Products
+    </a>
+  </div>
+
+  <div class="orders-list"
+       *ngIf="!loading && !errorMessage && orders.length > 0">
+    <article class="order-card" *ngFor="let order of orders">
+
+      <div class="order-top">
+        <div>
+          <span class="muted-label">Order ID</span>
+          <h2>#{{ order.orderId }}</h2>
+          <p class="order-date">
+            {{ order.orderDate | date:'dd MMM yyyy, hh:mm a' }}
+          </p>
+        </div>
+
+        <span class="status-badge"
+              [ngClass]="getStatusClass(order.status)">
+          {{ order.status }}
+        </span>
+      </div>
+
+      <div class="order-summary">
+        <div>
+          <span class="muted-label">Items</span>
+          <strong>{{ getItemCount(order) }}</strong>
+        </div>
+
+        <div>
+          <span class="muted-label">Total Amount</span>
+          <strong class="order-total">
+            {{ order.totalAmount | currency:'INR':'symbol':'1.2-2' }}
+          </strong>
+        </div>
+
+        <div>
+          <span class="muted-label">Payment</span>
+          <strong>{{ order.paymentMethod || 'N/A' }}</strong>
+          <small>{{ order.paymentStatus || 'N/A' }}</small>
+        </div>
+      </div>
+
+      <div class="items-section">
+        <h3>Order Items</h3>
+
+        <div class="order-item" *ngFor="let item of order.items">
+          <div class="item-info">
+            <h4>{{ item.productName }}</h4>
+            <p>
+              {{ item.unitPrice | currency:'INR':'symbol':'1.2-2' }}
+              × {{ item.quantity }}
+            </p>
+            <small *ngIf="item.sellerStatus">
+              Seller status: {{ item.sellerStatus }}
+            </small>
+          </div>
+
+          <strong>
+            {{ item.subtotal | currency:'INR':'symbol':'1.2-2' }}
+          </strong>
+        </div>
+      </div>
+
+      <div class="shipping-section"
+           *ngIf="order.shippingAddressLine">
+        <h3>Delivery Address</h3>
+
+        <p><strong>{{ order.shippingFullName }}</strong></p>
+        <p>{{ order.shippingPhone }}</p>
+        <p>
+          {{ order.shippingAddressLine }},
+          {{ order.shippingCity }},
+          {{ order.shippingState }} -
+          {{ order.shippingPostalCode }}
+        </p>
+      </div>
+
+    </article>
+  </div>
+</div>

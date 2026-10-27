@@ -1,0 +1,19 @@
+
+<div class="admin-dashboard">
+  <h1>Admin Dashboard</h1>
+  <p>Welcome, Admin! Choose a section to manage.</p>
+  <button (click)="logout()">Logout</button>
+  <div class="dashboard-cards">
+    <div class="dashboard-card">
+      <h2>Buyer Management</h2>
+      <p>Manage buyers and their accounts.</p>
+      <button (click)="openBuyers()">Manage Buyers</button>
+    </div>
+
+    <div class="dashboard-card">
+      <h2>Seller Management</h2>
+      <p>Manage sellers and their accounts.</p>
+      <button (click)="openSellers()">Manage Sellers</button>
+    </div>
+  </div>
+</div>

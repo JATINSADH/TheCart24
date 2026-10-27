@@ -1,0 +1,69 @@
+
+<section class="register-page">
+  <div class="register-card">
+
+    <a routerLink="/" class="brand">
+      TheCart24<span>.</span>
+    </a>
+
+    <h1>Create your account</h1>
+    <p class="subtitle">Join TheCart24 and start shopping.</p>
+
+    <form (ngSubmit)="register()" #registerForm="ngForm">
+
+      <label for="name">Full name</label>
+      <input id="name"
+             type="text"
+             name="name"
+             [(ngModel)]="name"
+             required
+             placeholder="Enter your full name" />
+
+      <label for="email">Email address</label>
+      <input id="email"
+             type="email"
+             name="email"
+             [(ngModel)]="email"
+             required
+             email
+             placeholder="you@example.com" />
+
+      <label for="password">Password</label>
+      <input id="password"
+             type="password"
+             name="password"
+             [(ngModel)]="password"
+             required
+             minlength="8"
+             placeholder="Create a password" />
+
+      <label for="confirmPassword">Confirm password</label>
+      <input id="confirmPassword"
+             type="password"
+             name="confirmPassword"
+             [(ngModel)]="confirmPassword"
+             required
+             placeholder="Re-enter your password" />
+
+      <p class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+
+      <p class="success-message" *ngIf="successMessage">
+        {{ successMessage }}
+      </p>
+
+      <button type="submit"
+              [disabled]="loading || registerForm.invalid">
+        {{ loading ? 'Creating account...' : 'Create Account' }}
+      </button>
+
+    </form>
+
+    <p class="login-link">
+      Already have an account?
+      <a routerLink="/login">Sign in</a>
+    </p>
+
+  </div>
+</section>

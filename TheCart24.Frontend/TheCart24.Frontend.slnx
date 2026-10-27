@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="TheCart24.Frontend.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

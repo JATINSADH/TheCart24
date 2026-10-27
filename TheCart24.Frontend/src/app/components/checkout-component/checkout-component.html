@@ -1,0 +1,276 @@
+
+<div class="checkout-page">
+  <header class="checkout-header">
+    <div>
+      <h1>Checkout</h1>
+      <p>Complete your delivery details to place your order.</p>
+    </div>
+    <a routerLink="/cart" class="back-cart">← Back to Cart</a>
+  </header>
+
+  <p class="checkout-error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+  <div class="checkout-layout">
+    <main class="checkout-main">
+      <section class="checkout-card">
+        <div class="card-heading">
+          <span class="step-number">1</span>
+          <div>
+            <h2>Delivery Address</h2>
+            <p>Where should we deliver your order?</p>
+          </div>
+ 
+        </div>
+
+        <form #checkoutForm="ngForm" (ngSubmit)="placeOrder()">
+          <div class="form-grid">
+            <div class="form-field full-width">
+              <label for="customerName">Full Name *</label>
+              <input id="customerName"
+                     name="customerName"
+                     [(ngModel)]="customerName"
+                     placeholder="Enter your full name"
+                     autocomplete="name"
+                     required />
+            </div>
+
+            <div class="form-field full-width">
+              <label for="mobileNumber">Mobile Number *</label>
+              <input id="mobileNumber"
+                     name="mobileNumber"
+                     [(ngModel)]="mobileNumber"
+                     type="tel"
+                     placeholder="Enter mobile number"
+                     autocomplete="tel"
+                     required
+                     pattern="[0-9]{10}"
+                     maxlength="10" />
+              <small>Enter a 10-digit mobile number.</small>
+            </div>
+
+            <div class="form-field full-width">
+              <label for="address">Address *</label>
+              <textarea id="address"
+                        name="address"
+                        [(ngModel)]="address"
+                        placeholder="House no., street, area"
+                        autocomplete="street-address"
+                        rows="3"
+                        required></textarea>
+            </div>
+
+            <div class="form-field">
+              <label for="city">City *</label>
+              <input id="city"
+                     name="city"
+                     [(ngModel)]="city"
+                     placeholder="City"
+                     autocomplete="address-level2"
+                     required />
+            </div>
+
+            <div class="form-field">
+              <label for="state">State *</label>
+              <input id="state"
+                     name="state"
+                     [(ngModel)]="state"
+                     placeholder="State"
+                     autocomplete="address-level1"
+                     required />
+            </div>
+
+            <div class="form-field full-width">
+              <label for="pincode">PIN Code *</label>
+              <input id="pincode"
+                     name="pincode"
+                     [(ngModel)]="pincode"
+                     placeholder="6-digit PIN code"
+                     autocomplete="postal-code"
+                     inputmode="numeric"
+                     maxlength="6"
+                     pattern="[0-9]{6}"
+                     required />
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="checkout-card discount-card">
+        <div class="section-heading">
+          <span class="step-number">2</span>
+          <div>
+            <h3>Discount Coupon</h3>
+            <p>Apply the currently available offer to your order.</p>
+          </div>
+        </div>
+
+        <label for="couponCode">Available Discount</label>
+
+        <div class="discount-input-row">
+          <input id="couponCode"
+                 type="text"
+                 [value]="activeOffer
+? activeOffer.name + ' - ' + activeOffer.discountPercentage + '% OFF'
+: 'Checking available offers...'"
+                 readonly />
+
+          <button type="button"
+                  class="apply-discount-btn"
+                  (click)="applyCoupon()"
+                  [disabled]="applyingDiscount || !activeOffer || cartItems.length === 0">
+            {{ applyingDiscount ? 'Applying...' : 'Apply Discount' }}
+          </button>
+        </div>
+
+        <p class="offer-hint" *ngIf="activeOffer">
+          {{ activeOffer.name }}: {{ activeOffer.discountPercentage }}% off on eligible products.
+        </p>
+
+        <p class="offer-hint" *ngIf="!activeOffer">
+          No active offer is available right now.
+        </p>
+
+        <p *ngIf="discountMessage"
+           class="discount-message"
+           [class.discount-success]="discountApplied">
+          {{ discountMessage }}
+        </p>
+      </section>
+
+      <section class="checkout-card">
+        <div class="card-heading">
+          <span class="step-number">3</span>
+          <div>
+            <h2>Payment Method</h2>
+            <p>Select how you want to pay.</p>
+          </div>
+        </div>
+
+        <label class="payment-option">
+          <input type="radio"
+                 name="paymentMethod"
+                 [(ngModel)]="paymentMethod"
+                 value="COD" />
+          <span class="payment-icon">💵</span>
+          <span class="payment-details">
+            <strong>Cash on Delivery</strong>
+            <small>Pay when your order arrives.</small>
+          </span>
+          <span class="payment-badge">Available</span>
+        </label>
+      </section>
+
+
+
+      <button type="button"
+              class="place-order-mobile"
+              [disabled]="loading"
+              (click)="placeOrder()">
+        {{ loading ? 'Placing Order...' : 'Place Order' }}
+      </button>
+    </main>
+
+
+    <aside class="checkout-summary">
+      <h2>Order Summary</h2>
+
+      <!-- Loading state -->
+      <div class="summary-placeholder" *ngIf="loadingCart">
+        <span class="summary-icon">🛒</span>
+        <h3>Loading your cart...</h3>
+        <p>Please wait while we fetch your items.</p>
+      </div>
+
+      <!-- Error state -->
+      <div *ngIf="!loadingCart && cartError" class="summary-placeholder">
+        <p>{{ cartError }}</p>
+        <button type="button" (click)="loadCartSummary()">
+          Try Again
+        </button>
+      </div>
+
+      <!-- Empty cart -->
+      <div class="summary-placeholder"
+           *ngIf="!loadingCart && !cartError && cartItems.length === 0">
+        <span class="summary-icon">🛒</span>
+        <h3>Your cart is empty</h3>
+        <p>Add products to see your order total.</p>
+      </div>
+
+      <!-- Actual cart items -->
+      <div class="summary-products"
+           *ngIf="!loadingCart && !cartError && cartItems.length > 0">
+        <div class="summary-product" *ngFor="let item of cartItems">
+          <div class="summary-product-info">
+            <h3>{{ item.productName }}</h3>
+            <p>
+              {{ item.price | currency:'INR':'symbol':'1.2-2' }}
+              × {{ item.quantity }}
+            </p>
+          </div>
+
+          <strong>
+            {{ item.subtotal | currency:'INR':'symbol':'1.2-2' }}
+          </strong>
+        </div>
+      </div>
+
+      <!-- Subtotal -->
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong>
+          {{ subtotal | currency:'INR':'symbol':'1.2-2' }}
+        </strong>
+      </div>
+
+      <!-- Coupon discount: integration later -->
+      <div class="summary-row">
+        <span>
+          Discount
+          <small *ngIf="discountApplied">
+            ({{ appliedDiscountPercentage }}% off)
+          </small>
+        </span>
+
+        <strong>
+          - {{ discount | currency:'INR':'symbol':'1.2-2' }}
+        </strong>
+      </div>
+
+      <!-- Delivery -->
+      <div class="summary-row">
+        <span>Delivery</span>
+        <span class="free-label">
+          {{ deliveryCharge === 0 ? 'FREE' : (deliveryCharge | currency:'INR':'symbol':'1.2-2') }}
+        </span>
+      </div>
+
+      <div class="summary-divider"></div>
+
+      <!-- Final total -->
+      <div class="summary-total">
+        <strong>Total Amount</strong>
+        <strong>
+          {{ totalAmount | currency:'INR':'symbol':'1.2-2' }}
+        </strong>
+      </div>
+
+      <p class="summary-note">
+        Your order total is calculated from your cart.
+      </p>
+
+      <button type="button"
+              class="place-order-desktop"
+              [disabled]="loading || loadingCart || cartItems.length === 0 || !!cartError"
+              (click)="placeOrder()">
+        {{ loading ? 'Placing Order...' : 'Place Order' }}
+      </button>
+
+      <div class="secure-message">
+        🔒 Your checkout is protected.
+      </div>
+    </aside>
+
+  </div>
+</div>

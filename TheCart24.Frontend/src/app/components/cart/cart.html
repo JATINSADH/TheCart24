@@ -1,0 +1,123 @@
+
+<div class="cart-page">
+  <div class="cart-header">
+    <div>
+      <h1>My Cart</h1>
+      <p class="cart-subtitle">Review your items before checkout</p>
+    </div>
+    <span class="item-count">{{ cartItems.length }} items</span>
+  </div>
+  <button class="back-btn" (click)="goToProducts()">
+    ← Back to Products
+  </button>
+
+  <p class="cart-message" *ngIf="loading">Loading your cart...</p>
+
+  <p class="cart-error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+  <div class="empty-cart"
+       *ngIf="!loading && !errorMessage && cartItems.length === 0">
+    <div class="empty-icon">🛒</div>
+    <h2>Your cart is empty</h2>
+    <p>Looks like you haven't added anything yet.</p>
+    <a routerLink="/products" class="primary-btn">Explore Products</a>
+  </div>
+
+  <div class="cart-layout"
+       *ngIf="!loading && !errorMessage && cartItems.length > 0">
+    <section class="cart-products">
+      <div class="section-heading">
+        <h2>Cart Items</h2>
+        <a routerLink="/products" class="continue-link">
+          + Add more items
+        </a>
+      </div>
+
+      <article class="cart-product" *ngFor="let item of cartItems">
+        <div class="product-image">
+          <img *ngIf="item.imageUrl && !item.imageUrl.includes('example.com')"
+               [src]="item.imageUrl"
+               [alt]="item.productName" />
+          <span *ngIf="!item.imageUrl || item.imageUrl.includes('example.com')"
+                class="image-placeholder">📦</span>
+        </div>
+
+        <div class="product-details">
+          <h3>{{ item.productName }}</h3>
+          <p class="product-id">Product ID: {{ item.productId }}</p>
+          <span class="stock-label">In your cart</span>
+          <div class="quantity-control">
+            <button type="button"
+                    class="quantity-btn"
+                    aria-label="Decrease quantity"
+                    [disabled]="item.quantity <= 1"
+                    (click)="decreaseQuantity(item)">
+              −
+            </button>
+
+            <span class="quantity-value">{{ item.quantity }}</span>
+
+            <button type="button"
+                    class="quantity-btn"
+                    aria-label="Increase quantity"
+                    [disabled]="item.quantity >= 100"
+                    (click)="increaseQuantity(item)">
+              +
+            </button>
+          </div>
+
+          <button type="button"
+                  class="remove-btn"
+                  (click)="removeItem(item.cartItemId)">
+            🗑 Remove
+          </button>
+        </div>
+
+        <div class="product-price">
+          <strong>₹{{ item.price | number:'1.2-2' }}</strong>
+          <span>Item total</span>
+          <b>₹{{ item.subtotal | number:'1.2-2' }}</b>
+        </div>
+      </article>
+
+      <a routerLink="/products" class="back-link">
+        ← Continue Shopping
+      </a>
+    </section>
+
+    <aside class="order-summary">
+      <h2>Order Summary</h2>
+
+      <div class="summary-row">
+        <span>Items ({{ cartItems.length }})</span>
+        <span>₹{{ subtotal | number:'1.2-2' }}</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Delivery</span>
+        <span class="free-delivery">FREE</span>
+      </div>
+
+      <div class="summary-divider"></div>
+
+      <div class="summary-total">
+        <span>Subtotal</span>
+        <strong>₹{{ subtotal | number:'1.2-2' }}</strong>
+      </div>
+
+      <button type="button"
+              class="checkout-btn"
+              routerLink="/checkout"
+              [disabled]="cartItems.length === 0 || loading">
+        Proceed to Checkout
+      </button>
+
+      <div class="secure-note">
+        <span>🔒</span>
+        <span>Secure shopping experience</span>
+      </div>
+    </aside>
+  </div>
+</div>
